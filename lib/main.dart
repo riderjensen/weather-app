@@ -18,6 +18,9 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  static const MethodChannel methodChannel =
+      MethodChannel('samples.flutter.io/battery');
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -40,6 +43,10 @@ class _MyHomePageState extends State<MyHomePage> {
                   child: Text('Get weather report'),
                   onPressed: () async => await _getWeather(),
                 ),
+                MaterialButton(
+                  child: Text('Get battery'),
+                  onPressed: () async => await _getBattery(),
+                ),
               ],
             )));
   }
@@ -60,6 +67,18 @@ class _MyHomePageState extends State<MyHomePage> {
           'myImageTest.png', bytes, 'my image title');
     } catch (e) {
       print('error: $e');
+    }
+  }
+
+  Future<Null> _getBattery() async {
+    try {
+      methodChannel.invokeMethod('getBatteryLevel').then((resp) {
+        print(resp);
+      });
+      // await methodChannel.invokeMethod('setWallpaper', 'assets/graphic.png');
+
+    } on PlatformException catch (e) {
+      print("Failed to Set Wallpaer: '${e.message}'.");
     }
   }
 
