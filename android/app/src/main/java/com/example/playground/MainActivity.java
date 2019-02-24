@@ -38,6 +38,13 @@ public class MainActivity extends FlutterActivity {
 					} else {
 						result.error("UNAVAILABLE", "Battery level not available.", null);
 					}
+				} else if(call.method.equals("setWallpaper")) {
+					boolean changed = changeWallpaper();
+					if(changed){
+						result.success("Nice");						
+					} else {
+						result.error("UNAVAILABLE", "Cant change the wallpaper", null);
+					}
 				} else {
 					result.notImplemented();
 				}
@@ -60,5 +67,10 @@ public class MainActivity extends FlutterActivity {
 		return batteryLevel;
 	}
 
+	   private boolean changeWallpaper() {
+		// use this function to change the wallpaper
+
+		return true;
+	}
 
 }

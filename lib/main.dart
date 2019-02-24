@@ -47,6 +47,10 @@ class _MyHomePageState extends State<MyHomePage> {
                   child: Text('Get battery'),
                   onPressed: () async => await _getBattery(),
                 ),
+                MaterialButton(
+                  child: Text('Change wallpaper'),
+                  onPressed: () async => await _changeWallpaper(),
+                ),
               ],
             )));
   }
@@ -75,10 +79,18 @@ class _MyHomePageState extends State<MyHomePage> {
       methodChannel.invokeMethod('getBatteryLevel').then((resp) {
         print(resp);
       });
-      // await methodChannel.invokeMethod('setWallpaper', 'assets/graphic.png');
-
     } on PlatformException catch (e) {
       print("Failed to Set Wallpaer: '${e.message}'.");
+    }
+  }
+
+  Future<Null> _changeWallpaper() async {
+    try {
+      methodChannel.invokeMethod('setWallpaper').then((resp) {
+        print(resp);
+      });
+    } on PlatformException catch (e) {
+      print("Failed to Set Wallpaper: '${e.message}'.");
     }
   }
 
