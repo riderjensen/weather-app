@@ -67,9 +67,9 @@ class _MyHomePageState extends State<MyHomePage> {
     try {
       http
           .get(
-              'http://api.wunderground.com/api/90185e79ff6e655a/conditions/q/CA/84604.json')
+              'https://api.darksky.net/forecast/5460fcb55a54340ef42363d8d1729197/40.297119,-111.695007?exclude=minutely,hourly,daily,flags')
           .then((resp) {
-        print(jsonDecode(resp.body)['current_observation']['weather']);
+        print(jsonDecode(resp.body)['currently']['summary']);
       });
     } catch (e) {
       print('error: $e');
