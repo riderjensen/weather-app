@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:esys_flutter_share/esys_flutter_share.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
 
 void main() => runApp(MaterialApp(
       home: MaterialApp(
@@ -62,7 +64,14 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   Future _getWeather() async {
-    try {} catch (e) {
+    try {
+      http
+          .get(
+              'http://api.wunderground.com/api/90185e79ff6e655a/conditions/q/CA/84604.json')
+          .then((resp) {
+        print(jsonDecode(resp.body)['current_observation']['weather']);
+      });
+    } catch (e) {
       print('error: $e');
     }
   }
