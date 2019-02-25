@@ -1,15 +1,22 @@
 package com.example.playground;
 
+import java.io.IOException;
+
 import android.content.ContextWrapper;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.BatteryManager;
 import android.os.Build.VERSION;
 import android.os.Build.VERSION_CODES;
+import android.app.Activity;
 import android.os.Bundle;
+import android.app.WallpaperManager;
+import android.graphics.Bitmap;
+import android.widget.ImageView;
+import android.view.View;
+
 import io.flutter.app.FlutterActivity;
 import io.flutter.plugins.GeneratedPluginRegistrant;
-
 import io.flutter.app.FlutterActivity;
 import io.flutter.plugin.common.MethodCall;
 import io.flutter.plugin.common.MethodChannel;
@@ -20,6 +27,8 @@ import io.flutter.plugin.common.MethodChannel.Result;
 
 public class MainActivity extends FlutterActivity {
 	private static final String CHANNEL = "samples.flutter.io/battery";
+
+	Bitmap bitmap;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -67,9 +76,13 @@ public class MainActivity extends FlutterActivity {
 		return batteryLevel;
 	}
 
-	   private boolean changeWallpaper() {
-		// use this function to change the wallpaper
-
+	private boolean changeWallpaper() {
+		WallpaperManager myWallpaperManager = WallpaperManager.getInstance(getApplicationContext());
+		try {
+			myWallpaperManager.setResource(R.drawable.graphic);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 		return true;
 	}
 
