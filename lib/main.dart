@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:esys_flutter_share/esys_flutter_share.dart';
 import 'package:http/http.dart' as http;
+import 'dart:async';
 import 'dart:convert';
 
 void main() => runApp(MaterialApp(
@@ -66,7 +67,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
   Future _shareImage() async {
     try {
-      final ByteData bytes = await rootBundle.load('assets/graphic.png');
+      final ByteData bytes = await rootBundle.load('assets/graphic.gif');
       await EsysFlutterShare.shareImage(
           'myImageTest.png', bytes, 'my image title');
     } catch (e) {
@@ -80,7 +81,7 @@ class _MyHomePageState extends State<MyHomePage> {
         print(resp);
       });
     } on PlatformException catch (e) {
-      print("Failed to Set Wallpaer: '${e.message}'.");
+      print("Failed to get battery level: '${e.message}'.");
     }
   }
 
